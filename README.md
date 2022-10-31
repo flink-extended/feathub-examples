@@ -6,7 +6,7 @@ This project provides example programs for key
 ## Table of Contents
 
 - [Flink - DerivedFeatureView](flink-derived-feature-view)
-
+- [Flink - SlidingFeatureView](flink-sliding-feature-view)
 
 
 ## Code Formatting Guide
