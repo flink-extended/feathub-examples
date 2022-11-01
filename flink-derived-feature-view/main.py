@@ -114,11 +114,12 @@ if __name__ == "__main__":
         ]
     )
 
-    purchase_events_with_features_sink = FileSystemSink(
-        path="/tmp/data/output.json",
-        data_format="csv"
-    )
+    result_table = client.get_features(purchase_events_with_features)
 
-    client.get_features(purchase_events_with_features).execute_insert(
-        purchase_events_with_features_sink, allow_overwrite=True
-    ).wait()
+    result_table_df = result_table.to_pandas()
+
+    print(result_table_df)
+
+    hdfs_sink = FileSystemSink(path="/tmp/data/output.json", data_format="csv")
+
+    result_table.execute_insert(sink=hdfs_sink, allow_overwrite=True).wait()

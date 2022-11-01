@@ -55,7 +55,6 @@ if __name__ == "__main__":
         }
     )
 
-
     purchase_events_schema = (
         Schema.new_builder()
         .column("user_id", types.String)
@@ -158,4 +157,3 @@ if __name__ == "__main__":
         user_online_features_sink,
         allow_overwrite=True,
     ).wait()
-
