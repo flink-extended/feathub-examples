@@ -149,11 +149,12 @@ if __name__ == "__main__":
     )
 
     # TODO: can we support to_pandas() in the Flink session mode?
-    # TODO: cancel the job before the program exists.
     # TODO: make sure the emitted output is correct.
     # TODO: can sliding window timestamp be more detailed e.g. 2022-01-01 00:01:59.999?
-    client.materialize_features(
-        user_online_features,
-        user_online_features_sink,
-        allow_overwrite=True,
-    ).wait()
+    job = client.materialize_features(
+        user_online_features, user_online_features_sink, allow_overwrite=True
+    )
+    try:
+        job.wait()
+    finally:
+        job.cancel()

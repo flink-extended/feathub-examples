@@ -10,7 +10,7 @@ following steps:
    Each purchase event has the following fields:
    - user_id, unique identifier of the user that made the purchase.
    - item_id, unique identifier of the item that is purchased.
-   - item_count, number of items purcahsed.
+   - item_count, number of items purchased.
    - timestamp, time when this purchase is made.
 
 2. Read a stream of real-time item price events from a Kafka topic.
@@ -46,6 +46,7 @@ following steps:
 Prerequisites for running this example:
 - Unix-like operating system (e.g. Linux, Mac OS X)
 - Python 3.7
+- Docker Compose >= 20.10
 
 # Step-By-Step Instructions
 
@@ -107,7 +108,7 @@ folder to run this example.
    finished.
 
    Note that since the FeatHub job is reading from Kafka, it will run
-   indefinitely and you would need to manually press Contrl-C to stop the program.
+   indefinitely, and you would need to manually press Control-C to stop the program.
 
    ```bash
    docker-compose down
