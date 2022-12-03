@@ -28,22 +28,23 @@ from feathub.table.schema import Schema
 
 if __name__ == "__main__":
     client = FeathubClient(
-        config={
+        props={
             "processor": {
-                "processor_type": "flink",
-                "flink": {"rest.address": "localhost", "rest.port": "8081"},
+                "type": "flink",
+                "flink": {"rest.address": "localhost", "rest.port": 8081},
             },
             "online_store": {
+                "types": ["memory"],
                 "memory": {},
             },
             "registry": {
-                "registry_type": "local",
+                "type": "local",
                 "local": {
                     "namespace": "default",
                 },
             },
             "feature_service": {
-                "service_type": "local",
+                "type": "local",
                 "local": {},
             },
         }
