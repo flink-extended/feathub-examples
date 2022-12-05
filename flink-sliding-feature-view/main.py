@@ -15,21 +15,16 @@
 from datetime import timedelta
 
 from feathub.feathub_client import FeathubClient
-from feathub.feature_tables.sinks.file_system_sink import FileSystemSink
 from feathub.feature_tables.sources.kafka_source import KafkaSource
 from feathub.feature_tables.sinks.kafka_sink import KafkaSink
 from feathub.feature_views.feature import Feature
 from feathub.feature_views.derived_feature_view import DerivedFeatureView
 from feathub.feature_views.sliding_feature_view import SlidingFeatureView
-from feathub.feature_views.transforms.over_window_transform import (
-    OverWindowTransform,
-)
 from feathub.feature_views.transforms.sliding_window_transform import (
     SlidingWindowTransform,
 )
 
 from feathub.common import types
-from feathub.feature_tables.sources.file_system_source import FileSystemSource
 from feathub.table.schema import Schema
 
 if __name__ == "__main__":
@@ -66,8 +61,6 @@ if __name__ == "__main__":
     )
 
     # TODO: update the demo to continuously emit records in the Kafka stream.
-    # TODO: allow user to set max idleness in this demo so that sliding window can
-    # progress after all events in the kafka source have been consumed.
     purchase_events_source = KafkaSource(
         name="purchase_events",
         bootstrap_server="kafka:9092",
@@ -102,6 +95,7 @@ if __name__ == "__main__":
         timestamp_field="timestamp",
         timestamp_format="%Y-%m-%d %H:%M:%S",
         startup_mode="earliest-offset",
+        is_bounded=True
     )
 
     purchase_events_with_price = DerivedFeatureView(
@@ -149,9 +143,13 @@ if __name__ == "__main__":
         value_format="json",
     )
 
-    # TODO: can we support to_pandas() in the Flink session mode?
     # TODO: make sure the emitted output is correct.
-    # TODO: can sliding window timestamp be more detailed e.g. 2022-01-01 00:01:59.999?
+    result_table = client.get_features(user_online_features)
+
+    result_table_df = result_table.to_pandas(force_bounded=True)
+
+    print(result_table_df)
+
     job = client.materialize_features(
         user_online_features, user_online_features_sink, allow_overwrite=True
     )

@@ -99,9 +99,11 @@ folder to run this example.
    The Kafka topic should contain the following messages:
 
    ```
-   {"user_id":"user_1","timestamp":"2022-01-01 00:00:59","total_payment_last_two_minutes":100.0}
-   {"user_id":"user_1","timestamp":"2022-01-01 00:01:59","total_payment_last_two_minutes":500.0}
-   {"user_id":"user_1","timestamp":"2022-01-01 00:02:59","total_payment_last_two_minutes":1000.0}
+   {"user_id":"user_1","window_time":1640966459999,"total_payment_last_two_minutes":100.0}
+   {"user_id":"user_1","window_time":1640966519999,"total_payment_last_two_minutes":500.0}
+   {"user_id":"user_1","window_time":1640966579999,"total_payment_last_two_minutes":1000.0}
+   {"user_id":"user_2","window_time":1640966639999,"total_payment_last_two_minutes":300.0}
+   {"user_id":"user_1","window_time":1640966639999,"total_payment_last_two_minutes":600.0}
    ```
 
 5. Tear down the Flink and the Kafka clusters after the FeatHub program has
