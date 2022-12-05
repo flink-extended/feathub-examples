@@ -1,0 +1,5 @@
+{"user_id":"user_1","window_time":1640966459999,"total_payment_last_two_minutes":100.0}
+{"user_id":"user_1","window_time":1640966519999,"total_payment_last_two_minutes":500.0}
+{"user_id":"user_1","window_time":1640966579999,"total_payment_last_two_minutes":1000.0}
+{"user_id":"user_2","window_time":1640966639999,"total_payment_last_two_minutes":300.0}
+{"user_id":"user_1","window_time":1640966639999,"total_payment_last_two_minutes":600.0}
