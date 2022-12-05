@@ -44,8 +44,8 @@ folder to run this example.
 1. Install Feathub and Flink pip package.
 
    ```bash
-   $ pip install apache-flink==1.15.2
-   $ pip install feathub-nightly
+   $ python -m pip install apache-flink==1.15.2
+   $ python -m pip install --upgrade feathub-nightly
    ```
 
 2. Start the Flink cluster.
