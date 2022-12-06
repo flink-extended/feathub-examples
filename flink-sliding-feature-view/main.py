@@ -71,7 +71,7 @@ if __name__ == "__main__":
         consumer_group="feathub",
         keys=["user_id"],
         timestamp_field="timestamp",
-        timestamp_format="%Y-%m-%d %H:%M:%S",
+        timestamp_format="%Y-%m-%d %H:%M:%S %z",
         startup_mode="earliest-offset",
     )
 
@@ -93,7 +93,7 @@ if __name__ == "__main__":
         consumer_group="feathub",
         keys=["item_id"],
         timestamp_field="timestamp",
-        timestamp_format="%Y-%m-%d %H:%M:%S",
+        timestamp_format="%Y-%m-%d %H:%M:%S %z",
         startup_mode="earliest-offset",
         is_bounded=True
     )
