@@ -12,16 +12,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-from datetime import timedelta
 
 from feathub.feathub_client import FeathubClient
-from feathub.feature_tables.sinks.file_system_sink import FileSystemSink
 from feathub.feature_tables.sinks.kafka_sink import KafkaSink
-from feathub.feature_views.feature import Feature
-from feathub.feature_views.derived_feature_view import DerivedFeatureView
-from feathub.feature_views.transforms.over_window_transform import (
-    OverWindowTransform,
-)
 
 from feathub.common import types
 from feathub.feature_tables.sources.file_system_source import FileSystemSource
@@ -66,7 +59,7 @@ if __name__ == "__main__":
         data_format="json",
         schema=purchase_events_schema,
         timestamp_field="timestamp",
-        timestamp_format="%Y-%m-%d %H:%M:%S",
+        timestamp_format="%Y-%m-%d %H:%M:%S %z",
     )
 
     # TODO: make sure user_id is used as the Kafka message key.
@@ -98,7 +91,7 @@ if __name__ == "__main__":
         schema=item_price_events_schema,
         keys=["item_id"],
         timestamp_field="timestamp",
-        timestamp_format="%Y-%m-%d %H:%M:%S",
+        timestamp_format="%Y-%m-%d %H:%M:%S %z",
     )
 
     # TODO: make sure item_id is used as the Kafka message key.
