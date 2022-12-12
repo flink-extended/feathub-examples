@@ -117,10 +117,32 @@ if __name__ == "__main__":
 
     result_table = client.get_features(purchase_events_with_features)
 
-    result_table_df = result_table.to_pandas()
+    hdfs_sink = FileSystemSink(path="hdfs://namenode:8020/tmp/data/output", data_format="csv")
 
-    print(result_table_df)
+    result_table.execute_insert(sink=hdfs_sink, allow_overwrite=True).wait()
 
-    local_sink = FileSystemSink(path="/tmp/data/output.json", data_format="csv")
+    purchase_events_with_features_schema = (
+        Schema.new_builder()
+            .column("user_id", types.String)
+            .column("item_id", types.String)
+            .column("item_count", types.Int32)
+            .column("timestamp", types.String)
+            .column("price", types.Float32)
+            .column("total_payment_last_two_minutes", types.Float32)
+            .build()
+    )
 
-    result_table.execute_insert(sink=local_sink, allow_overwrite=True).wait()
+    purchase_events_with_features_source = FileSystemSource(
+        name="purchase_events_with_features",
+        path="hdfs://namenode:8020/tmp/data/output",
+        data_format="csv",
+        schema=purchase_events_with_features_schema,
+        timestamp_field="timestamp",
+        timestamp_format="%Y-%m-%d %H:%M:%S",
+    )
+
+    saved_table = client.get_features(purchase_events_with_features_source)
+
+    saved_table_df = saved_table.to_pandas()
+
+    print(saved_table_df)

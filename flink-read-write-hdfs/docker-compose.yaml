@@ -1,0 +1,67 @@
+version: '2.1'
+services:
+  flink:
+    image: flink-with-filesystem:latest
+    command:
+      - bash
+      - -c
+      - |
+        export HADOOP_CLASSPATH=$(hadoop classpath)
+        ./bin/start-cluster.sh; while true; do sleep 10; done
+    ports:
+      - "8081:8081"
+    volumes:
+      - "flink_data:/tmp/flink"
+      - "./data:/tmp/data"
+
+  namenode:
+    image: bde2020/hadoop-namenode:1.1.0-hadoop2.7.1-java8
+    container_name: namenode
+    environment:
+      - CLUSTER_NAME=test
+    ports:
+      - "8020:8020"
+      - "50070:50070"
+      - "50075:50075"
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_namenode:/hadoop/dfs/name
+
+  datanode1:
+    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
+    container_name: datanode1
+    depends_on:
+      - namenode
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode1:/hadoop/dfs/data
+
+  datanode2:
+    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
+    container_name: datanode2
+    depends_on:
+      - namenode
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode2:/hadoop/dfs/data
+
+  datanode3:
+    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
+    container_name: datanode3
+    depends_on:
+      - namenode
+    env_file:
+      - ./hadoop.env
+    volumes:
+      - hadoop_datanode3:/hadoop/dfs/data
+
+volumes:
+  flink_data:
+    driver: local
+  hadoop_namenode:
+  hadoop_datanode1:
+  hadoop_datanode2:
+  hadoop_datanode3:
