@@ -6,7 +6,7 @@ services:
       - bash
       - -c
       - |
-        export HADOOP_CLASSPATH=$(hadoop classpath)
+        export HADOOP_CLASSPATH=`hadoop classpath`
         ./bin/start-cluster.sh; while true; do sleep 10; done
     ports:
       - "8081:8081"

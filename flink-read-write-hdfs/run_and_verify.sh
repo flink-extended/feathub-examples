@@ -16,6 +16,8 @@
 
 set -e
 
+docker build --rm -t flink-with-filesystem:latest ../docker
+
 cd "$(dirname "$0")"
 PROJECT_DIR=$(cd "$(pwd)/.."; pwd)
 source "${PROJECT_DIR}"/tools/utils.sh

@@ -29,7 +29,7 @@ the following steps:
 
 4. Output the batch of purchase events backfilled with the extra features to HDFS.
 
-5. Read the results from HDFS.
+5. Re-read the purchase events from HDFS and output them to a local file.
 
 # Prerequisites
 
@@ -55,7 +55,7 @@ folder to run this example.
    $ docker build --rm -t flink-with-filesystem:latest ../docker
    ```
 
-3. Start the Flink cluster.
+3. Start the Flink cluster and Hadoop cluster.
 
    ```bash
    $ docker-compose up -d
