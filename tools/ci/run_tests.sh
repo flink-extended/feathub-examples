@@ -17,8 +17,8 @@ set -e
 
 PROJECT_DIR=$(cd "$(dirname "$0")/../.."; pwd)
 
-python -m pip install apache-flink==1.15.2
-python -m pip install --upgrade feathub-nightly
+python -m pip -q install apache-flink==1.15.2
+python -m pip -q install --upgrade feathub-nightly
 
 # Run the run_and_verify.sh script in each example folder
 for EXAMPLE_RUN_SCRIPT in "${PROJECT_DIR}"/*/run_and_verify.sh; do
