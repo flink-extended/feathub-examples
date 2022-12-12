@@ -52,7 +52,7 @@ folder to run this example.
 2. Build the Flink image to support HDFS.
 
    ```bash
-   $ docker build --rm -t flink-with-filesystem:latest ../docker
+   $ docker build --rm -t flink-with-filesystem -f ../docker/Dockerfile .
    ```
 
 3. Start the Flink cluster and Hadoop cluster.

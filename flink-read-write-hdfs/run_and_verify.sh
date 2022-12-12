@@ -16,7 +16,7 @@
 
 set -e
 
-docker build --rm -t flink-with-filesystem:latest ../docker
+docker build --rm -t flink-with-filesystem -f ../docker/Dockerfile .
 
 cd "$(dirname "$0")"
 PROJECT_DIR=$(cd "$(pwd)/.."; pwd)
