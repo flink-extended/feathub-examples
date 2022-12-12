@@ -71,7 +71,23 @@ folder to run this example.
    $ python main.py
    ```
 
-5. Tear down the Flink cluster after the FeatHub program has finished.
+5. Checkout the outputs.
+
+   ```bash
+   $ cat data/output.json/*
+   ```
+
+   The file should contain the following rows:
+
+   ```
+   user_1,item_1,1,"2022-01-01 00:00:00",100.0,100.0
+   user_1,item_2,2,"2022-01-01 00:01:00",200.0,500.0
+   user_1,item_1,3,"2022-01-01 00:02:00",200.0,1100.0
+   user_2,item_1,1,"2022-01-01 00:03:00",300.0,300.0
+   user_1,item_3,2,"2022-01-01 00:04:00",300.0,1200.0
+   ```
+
+6. Tear down the Flink cluster after the FeatHub program has finished.
 
    ```bash
    docker-compose down

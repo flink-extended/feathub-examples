@@ -146,3 +146,7 @@ if __name__ == "__main__":
     saved_table_df = saved_table.to_pandas()
 
     print(saved_table_df)
+
+    local_sink = FileSystemSink(path="/tmp/data/output.json", data_format="csv")
+
+    result_table.execute_insert(sink=local_sink, allow_overwrite=True).wait()

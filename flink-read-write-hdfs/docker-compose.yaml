@@ -25,43 +25,15 @@ services:
       - "50075:50075"
     env_file:
       - ./hadoop.env
-    volumes:
-      - hadoop_namenode:/hadoop/dfs/name
 
-  datanode1:
+  datanode:
     image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
-    container_name: datanode1
+    container_name: datanode
     depends_on:
       - namenode
     env_file:
       - ./hadoop.env
-    volumes:
-      - hadoop_datanode1:/hadoop/dfs/data
-
-  datanode2:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
-    container_name: datanode2
-    depends_on:
-      - namenode
-    env_file:
-      - ./hadoop.env
-    volumes:
-      - hadoop_datanode2:/hadoop/dfs/data
-
-  datanode3:
-    image: bde2020/hadoop-datanode:1.1.0-hadoop2.7.1-java8
-    container_name: datanode3
-    depends_on:
-      - namenode
-    env_file:
-      - ./hadoop.env
-    volumes:
-      - hadoop_datanode3:/hadoop/dfs/data
 
 volumes:
   flink_data:
     driver: local
-  hadoop_namenode:
-  hadoop_datanode1:
-  hadoop_datanode2:
-  hadoop_datanode3:
