@@ -23,7 +23,10 @@ services:
       MINIO_ROOT_USER: feathub
       MINIO_ROOT_PASSWORD: feathub-pass
     command: server --console-address ":9001" /data
+    volumes:
+      - "minio_storage:/data"
 
 volumes:
   flink_data:
     driver: local
+  minio_storage:
