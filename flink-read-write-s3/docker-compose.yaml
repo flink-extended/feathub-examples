@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+  flink:
+    image: flink-with-filesystem:latest
+    command:
+      - bash
+      - -c
+      - |
+        cp -f /tmp/data/flink.conf /opt/flink/conf/flink-conf.yaml
+        ./bin/start-cluster.sh; while true; do sleep 10; done
+    ports:
+      - "8081:8081"
+    volumes:
+      - "flink_data:/tmp/flink"
+      - "./data:/tmp/data"
+
+  minio:
+    image: quay.io/minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: feathub
+      MINIO_ROOT_PASSWORD: feathub-pass
+    command: server --console-address ":9001" /data
+
+volumes:
+  flink_data:
+    driver: local

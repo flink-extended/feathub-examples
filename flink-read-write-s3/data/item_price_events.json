@@ -1,0 +1,6 @@
+{"item_id":"item_1", "price":100.0, "timestamp":"2022-01-01 00:00:00"}
+{"item_id":"item_2", "price":200.0, "timestamp":"2022-01-01 00:00:00"}
+{"item_id":"item_3", "price":300.0, "timestamp":"2022-01-01 00:00:00"}
+{"item_id":"item_1", "price":200.0, "timestamp":"2022-01-01 00:01:30"}
+{"item_id":"item_1", "price":300.0, "timestamp":"2022-01-01 00:02:30"}
+{"item_id":"item_1", "price":400.0, "timestamp":"2022-01-01 00:03:30"}
