@@ -16,11 +16,11 @@
 
 set -e
 
-docker build --rm -t flink-with-filesystem -f ../docker/Dockerfile .
-
 cd "$(dirname "$0")"
 PROJECT_DIR=$(cd "$(pwd)/.."; pwd)
 source "${PROJECT_DIR}"/tools/utils.sh
+
+docker build --rm -t flink-with-filesystem -f ../docker/Dockerfile .
 
 chmod 777 data
 docker-compose up -d
