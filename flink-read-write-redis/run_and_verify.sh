@@ -13,17 +13,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 set -e
 
-PROJECT_DIR=$(cd "$(dirname "$0")/../.."; pwd)
+cd "$(dirname "$0")"
+PROJECT_DIR=$(cd "$(pwd)/.."; pwd)
+source "${PROJECT_DIR}"/tools/utils.sh
 
-python -m pip -q install --upgrade feathub-nightly
+chmod 777 data
+docker-compose up -d
+wait_for_port 8081 "Flink Cluster"
 
-docker build --rm -t feathub-flink -f ./docker/Dockerfile .
+python main.py
+exit_code=$?
+docker-compose down
 
-# Run the run_and_verify.sh script in each example folder
-for EXAMPLE_RUN_SCRIPT in "${PROJECT_DIR}"/*/run_and_verify.sh; do
-  echo "Running example ${EXAMPLE_RUN_SCRIPT}..."
-  bash "${EXAMPLE_RUN_SCRIPT}"
-  echo "Example ${EXAMPLE_RUN_SCRIPT} success."
-done
+exit $exit_code

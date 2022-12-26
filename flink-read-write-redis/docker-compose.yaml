@@ -1,0 +1,25 @@
+version: '2.1'
+services:
+  redis:
+    image: docker.io/redis:7.0-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - "redis_data:/tmp/redis"
+  flink:
+    image: feathub-flink:latest
+    command:
+      - bash
+      - -c
+      - "./bin/start-cluster.sh; while true; do sleep 10; done"
+    ports:
+      - "8081:8081"
+    volumes:
+      - "flink_data:/tmp/flink"
+      - "./data:/tmp/data"
+
+volumes:
+  redis_data:
+    driver: local
+  flink_data:
+    driver: local

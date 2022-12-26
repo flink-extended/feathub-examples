@@ -1,7 +1,7 @@
 version: '2.1'
 services:
   flink:
-    image: flink-with-filesystem:latest
+    image: feathub-flink:latest
     command:
       - bash
       - -c
