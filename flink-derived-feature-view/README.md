@@ -41,10 +41,9 @@ Prerequisites for running this example:
 Please execute the following commands under the `flink-derived-feature-view`
 folder to run this example.
 
-1. Install Feathub and Flink pip package.
+1. Install Feathub pip package.
 
    ```bash
-   $ python -m pip install apache-flink==1.15.2
    $ python -m pip install --upgrade feathub-nightly
    ```
 

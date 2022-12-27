@@ -42,17 +42,16 @@ Prerequisites for running this example:
 Please execute the following commands under the `flink-read-write-hdfs`
 folder to run this example.
 
-1. Install Feathub and Flink pip package.
+1. Install Feathub pip package.
 
    ```bash
-   $ python -m pip install apache-flink==1.15.2
    $ python -m pip install --upgrade feathub-nightly
    ```
 
 2. Build the Flink image to support HDFS.
 
    ```bash
-   $ docker build --rm -t flink-with-filesystem -f ../docker/Dockerfile .
+   $ docker build --rm -t feathub-flink -f ../docker/Dockerfile .
    ```
 
 3. Start the Flink cluster and Hadoop cluster.

@@ -1,7 +1,11 @@
-name: Nightly Build
+name: Build And Test
 on:
   schedule:
     - cron: '0 20 * * *'
+  push:
+  pull_request:
+    branches:
+      - '**'
   workflow_dispatch:
     inputs:
       debug_enabled:
