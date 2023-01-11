@@ -31,8 +31,8 @@ ln -s /usr/local/bin/python3 /usr/local/bin/python && \
 apt-get clean && \
 rm -rf /var/lib/apt/lists/*
 
-# Install Feathub (and PyFlink)
-RUN pip3 install feathub-nightly
+# Install Feathub with FlinkProcessor dependencies
+RUN pip3 install feathub-nightly[flink]
 
 # Further customization can be added.
 # You can refer to https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/docker/#further-customization.

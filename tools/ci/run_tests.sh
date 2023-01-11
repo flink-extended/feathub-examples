@@ -17,7 +17,7 @@ set -e
 
 PROJECT_DIR=$(cd "$(dirname "$0")/../.."; pwd)
 
-python -m pip -q install --upgrade feathub-nightly
+python -m pip -q install --upgrade "feathub-nightly[flink]"
 
 docker build --rm -t feathub-flink -f ./docker/Dockerfile .
 

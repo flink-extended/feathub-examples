@@ -42,10 +42,10 @@ Prerequisites for running this example:
 Please execute the following commands under the `flink-read-write-hdfs`
 folder to run this example.
 
-1. Install Feathub pip package.
+1. Install Feathub pip package with FlinkProcessor dependencies.
 
    ```bash
-   $ python -m pip install --upgrade feathub-nightly
+   $ python -m pip install --upgrade "feathub-nightly[flink]"
    ```
 
 2. Build the Flink image to support HDFS.
