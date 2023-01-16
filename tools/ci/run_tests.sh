@@ -19,7 +19,7 @@ PROJECT_DIR=$(cd "$(dirname "$0")/../.."; pwd)
 
 python -m pip -q install --upgrade "feathub-nightly[flink]"
 
-docker build --rm -t feathub-flink -f ./docker/Dockerfile .
+docker build -q --rm -t feathub-flink -f ./docker/Dockerfile .
 
 # Run the run_and_verify.sh script in each example folder
 for EXAMPLE_RUN_SCRIPT in "${PROJECT_DIR}"/*/run_and_verify.sh; do
