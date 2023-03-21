@@ -89,7 +89,6 @@ if __name__ == "__main__":
     # The total cost of purchases made by this user in the last 2 minutes.
     f_total_payment_last_two_minutes = Feature(
         name="total_payment_last_two_minutes",
-        dtype=types.Float32,
         transform=OverWindowTransform(
             expr="item_count * price",
             agg_func="SUM",

@@ -85,6 +85,7 @@ if __name__ == "__main__":
         features=[
             "item_price_features.price",
         ],
+        request_schema=Schema.new_builder().column("item_id", types.String).build(),
     )
     client.build_features([item_price_features_source, on_demand_feature_view])
 

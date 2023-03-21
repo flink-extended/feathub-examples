@@ -89,7 +89,6 @@ if __name__ == "__main__":
     # The total cost of purchases made by this user in the last 2 minutes.
     f_total_payment_last_two_minutes = Feature(
         name="total_payment_last_two_minutes",
-        dtype=types.Float32,
         transform=OverWindowTransform(
             expr="item_count * price",
             agg_func="SUM",
@@ -117,19 +116,21 @@ if __name__ == "__main__":
 
     result_table = client.get_features(purchase_events_with_features)
 
-    hdfs_sink = FileSystemSink(path="hdfs://namenode:8020/tmp/data/output", data_format="csv")
+    hdfs_sink = FileSystemSink(
+        path="hdfs://namenode:8020/tmp/data/output", data_format="csv"
+    )
 
     result_table.execute_insert(sink=hdfs_sink, allow_overwrite=True).wait()
 
     purchase_events_with_features_schema = (
         Schema.new_builder()
-            .column("user_id", types.String)
-            .column("item_id", types.String)
-            .column("item_count", types.Int32)
-            .column("timestamp", types.String)
-            .column("price", types.Float32)
-            .column("total_payment_last_two_minutes", types.Float32)
-            .build()
+        .column("user_id", types.String)
+        .column("item_id", types.String)
+        .column("item_count", types.Int32)
+        .column("timestamp", types.String)
+        .column("price", types.Float32)
+        .column("total_payment_last_two_minutes", types.Float32)
+        .build()
     )
 
     purchase_events_with_features_source = FileSystemSource(
