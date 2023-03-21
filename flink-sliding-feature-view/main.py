@@ -95,7 +95,7 @@ if __name__ == "__main__":
         timestamp_field="timestamp",
         timestamp_format="%Y-%m-%d %H:%M:%S %z",
         startup_mode="earliest-offset",
-        is_bounded=True
+        is_bounded=True,
     )
 
     purchase_events_with_price = DerivedFeatureView(
@@ -111,7 +111,6 @@ if __name__ == "__main__":
     # 1-minute step size.
     f_total_payment_last_two_minutes = Feature(
         name="total_payment_last_two_minutes",
-        dtype=types.Float32,
         transform=SlidingWindowTransform(
             expr="item_count * price",
             agg_func="SUM",

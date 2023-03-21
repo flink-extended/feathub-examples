@@ -80,7 +80,6 @@ def run(records_num: int):
         features=[
             Feature(
                 name="total_purchase_2_ms",
-                dtype=Int64,
                 transform=SlidingWindowTransform(
                     expr="item_count",
                     agg_func="SUM",
@@ -91,7 +90,6 @@ def run(records_num: int):
             ),
             Feature(
                 name="total_purchase_5_ms",
-                dtype=Int64,
                 transform=SlidingWindowTransform(
                     expr="item_count",
                     agg_func="SUM",
@@ -102,7 +100,6 @@ def run(records_num: int):
             ),
             Feature(
                 name="total_purchase_10_ms",
-                dtype=Int64,
                 transform=SlidingWindowTransform(
                     expr="item_count",
                     agg_func="SUM",
@@ -113,7 +110,6 @@ def run(records_num: int):
             ),
             Feature(
                 name="total_purchase_100_ms",
-                dtype=Int64,
                 transform=SlidingWindowTransform(
                     expr="item_count",
                     agg_func="SUM",
@@ -124,7 +120,6 @@ def run(records_num: int):
             ),
             Feature(
                 name="total_purchase_10_s",
-                dtype=Int64,
                 transform=SlidingWindowTransform(
                     expr="item_count",
                     agg_func="SUM",
