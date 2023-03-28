@@ -1,7 +1,7 @@
 # Overview
 
-This example shows how to use `DerivedFeatureView` to backfill the input dataset
-with extra features for offline training. It involves the following steps:
+This example shows how to use `SqlFeatureView` to clean the input dataset and
+generate features. It involves the following steps:
 
 1. Read a batch of historical purchase events from a file.
 
@@ -9,25 +9,24 @@ with extra features for offline training. It involves the following steps:
    - user_id, unique identifier of the user that made the purchase.
    - item_id, unique identifier of the item that is purchased.
    - item_count, number of items purchased.
+   - item_price, the price of the item when it is purchased.
    - timestamp, time when this purchase is made.
 
-2. Read a batch of historical item price events from a file.
+3. Check the format of the input purchase events and filter out invalid entries.
+   A valid purchase event is supposed to meet the following requirements.
 
-   Each item price event has the following fields:
-   - item_id, unique identifier of the item.
-   - price, the new price of this item.
-   - timestamp, time when the new price is used for this item.
+   - user_id and item_id should not be null.
+   - item_id should be a combination of the string "item_" and a number.
+   - item_count should be a positive integer.
 
-3. For each purchase event, append the following two fields by joining with item
-   price events and performing over-window aggregation, with point-in-time
-   correctness in both operations.
+3. For each purchase event, organize the values in each column with the
+   following transformations.
 
-   - price, price of the item at the time this purchase is made.
-   - total_payment_last_two_minutes, total cost of purchases made by this
-     user in a 2-minute window that ends at the time this purchase is made.
+   - convert user_id and item_id into lower-case strings.
+   - create total_amount column from the product of item_count and item_price.
+   - convert timestamp column into unix timestamp in seconds.
 
-4. Output the batch of purchase events backfilled with the extra features to a
-   file.
+4. Output the batch of the cleaned purchase events to a file.
 
 
 # Prerequisites
@@ -54,7 +53,8 @@ folder to run this example.
    ```
 
    After the Flink cluster has started, you should be able to navigate to the
-   web UI at [localhost:8081](http://localhost:8081) to view the Flink dashboard.
+   web UI at [localhost:8081](http://localhost:8081) to view the Flink
+   dashboard.
 
 3. Run the FeatHub program to compute and output the extended purchase events to
    a file.
@@ -72,11 +72,11 @@ folder to run this example.
    The file should contain the following rows:
 
    ```
-   user_1,item_1,1,"2022-01-01 00:00:00",100.0,100.0
-   user_1,item_2,2,"2022-01-01 00:01:00",200.0,500.0
-   user_1,item_1,3,"2022-01-01 00:02:00",200.0,1100.0
-   user_2,item_1,1,"2022-01-01 00:03:00",300.0,300.0
-   user_1,item_3,2,"2022-01-01 00:04:00",300.0,1200.0
+   user_1,item_1,1,100.0,100.0,1640966400
+   user_1,item_2,2,200.0,400.0,1640966460
+   user_1,item_1,3,300.0,900.0,1640966520
+   user_2,item_1,1,400.0,400.0,1640966580
+   user_1,item_3,2,200.0,400.0,1640966640
    ```
 
 5. Tear down the Flink cluster after the FeatHub program has finished.

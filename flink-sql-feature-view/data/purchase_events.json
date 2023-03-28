@@ -1,0 +1,8 @@
+{"user_id":"user_1", "item_id":"item_1", "item_count":1, "item_price":100.0, "timestamp":"2022-01-01 00:00:00"}
+{"user_id":"USER_1", "item_id":"item_2", "item_count":2, "item_price":200.0, "timestamp":"2022-01-01 00:01:00"}
+{"user_id":"user_2", "item_id":"item_2", "item_count":0, "item_price":200.0, "timestamp":"2022-01-01 00:01:00"}
+{"user_id":"user_1", "item_id":"Item_1", "item_count":3, "item_price":300.0, "timestamp":"2022-01-01 00:02:00"}
+{"user_id":"user_3", "item_id":"foobar", "item_count":1, "item_price":300.0, "timestamp":"2022-01-01 00:02:00"}
+{"user_id":"user_2", "item_id":"item_1", "item_count":1, "item_price":400.0, "timestamp":"2022-01-01 00:03:00"}
+{"user_id":"user_1", "item_id":null, "item_count":1, "item_price":400.0, "timestamp":"2022-01-01 00:03:00"}
+{"user_id":"user_1", "item_id":"item_3", "item_count":2, "item_price":200.0, "timestamp":"2022-01-01 00:04:00"}
