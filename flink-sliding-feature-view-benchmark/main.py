@@ -1,4 +1,4 @@
-#  Copyright 2022 The Feathub Authors
+#  Copyright 2022 The FeatHub Authors
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@ import time
 from datetime import timedelta
 
 from feathub.common import types
-from feathub.common.types import Int64
 from feathub.feathub_client import FeathubClient
 from feathub.feature_tables.sinks.black_hole_sink import BlackHoleSink
 from feathub.feature_tables.sources.datagen_source import DataGenSource, RandomField

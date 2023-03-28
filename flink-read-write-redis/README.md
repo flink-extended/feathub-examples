@@ -13,7 +13,7 @@ with `RedisSink`, and provides online serving based on the saved features with
 
 2. For each item price event, save the event into a Redis cluster. If a feature
    with the same item_id has been saved to Redis before, and the incoming event
-   has a larger timestamp than the existing one, Feathub would update the price
+   has a larger timestamp than the existing one, FeatHub would update the price
    and timestamp values of the entry in Redis with that of the incoming event.
 
 3. Read the latest item prices from the Redis cluster and use them to create an
@@ -31,7 +31,7 @@ Prerequisites for running this example:
 Please execute the following commands under the `flink-read-write-redis` folder
 to run this example.
 
-1. Install Feathub pip package with FlinkProcessor dependencies.
+1. Install FeatHub pip package with FlinkProcessor dependencies.
 
    ```bash
    $ python -m pip install --upgrade "feathub-nightly[flink]"

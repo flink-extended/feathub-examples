@@ -41,7 +41,7 @@ Prerequisites for running this example:
 Please execute the following commands under the `flink-derived-feature-view`
 folder to run this example.
 
-1. Install Feathub pip package with FlinkProcessor dependencies.
+1. Install FeatHub pip package with FlinkProcessor dependencies.
 
    ```bash
    $ python -m pip install --upgrade "feathub-nightly[flink]"

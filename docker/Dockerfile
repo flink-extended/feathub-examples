@@ -31,7 +31,7 @@ ln -s /usr/local/bin/python3 /usr/local/bin/python && \
 apt-get clean && \
 rm -rf /var/lib/apt/lists/*
 
-# Install Feathub with FlinkProcessor dependencies
+# Install FeatHub with FlinkProcessor dependencies
 RUN pip3 install feathub-nightly[flink]
 
 # Further customization can be added.
