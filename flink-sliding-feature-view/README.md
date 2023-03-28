@@ -53,7 +53,7 @@ Prerequisites for running this example:
 Please execute the following commands under the `flink-sliding-feature-view`
 folder to run this example.
 
-1. Install Feathub pip package with FlinkProcessor dependencies.
+1. Install FeatHub pip package with FlinkProcessor dependencies.
 
    ```bash
    $ python -m pip install --upgrade "feathub-nightly[flink]"
@@ -69,7 +69,7 @@ folder to run this example.
    navigate to the web UI at [localhost:8081](http://localhost:8081) to view the
    Flink dashboard.
 
-3. Producer events into the two Kafka topics.
+3. Produce events into the two Kafka topics.
 
    ```bash
    $ python initialize_kafka_topic.py

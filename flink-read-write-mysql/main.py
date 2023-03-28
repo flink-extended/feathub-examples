@@ -16,9 +16,9 @@ import numpy as np
 import pandas as pd
 from feathub.common import types
 from feathub.feathub_client import FeathubClient
-from feathub.feature_tables.sinks.redis_sink import RedisSink
+from feathub.feature_tables.sinks.mysql_sink import MySQLSink
 from feathub.feature_tables.sources.file_system_source import FileSystemSource
-from feathub.feature_tables.sources.redis_source import RedisSource
+from feathub.feature_tables.sources.mysql_source import MySQLSource
 from feathub.feature_views.on_demand_feature_view import OnDemandFeatureView
 from feathub.table.schema import Schema
 
@@ -27,7 +27,10 @@ if __name__ == "__main__":
         props={
             "processor": {
                 "type": "flink",
-                "flink": {"rest.address": "localhost", "rest.port": 8081},
+                "flink": {
+                    "rest.address": "localhost",
+                    "rest.port": 8081,
+                },
             },
             "online_store": {
                 "types": ["memory"],
@@ -66,17 +69,25 @@ if __name__ == "__main__":
 
     result_table = client.get_features(item_price_events_source)
 
-    redis_sink = RedisSink(
-        host="redis",
+    mysql_sink = MySQLSink(
+        database="feathub",
+        table="item_price_features",
+        host="mysql",
+        username="root",
+        password="root",
     )
 
-    result_table.execute_insert(sink=redis_sink, allow_overwrite=True).wait()
+    result_table.execute_insert(sink=mysql_sink, allow_overwrite=True).wait()
 
-    item_price_features_source = RedisSource(
+    item_price_features_source = MySQLSource(
         name="item_price_features",
+        database="feathub",
+        table="item_price_features",
         schema=item_price_events_schema,
-        keys=["item_id"],
         host="localhost",
+        username="root",
+        password="root",
+        keys=["item_id"],
         timestamp_field="timestamp",
     )
 

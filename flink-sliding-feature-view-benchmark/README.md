@@ -15,7 +15,7 @@ Prerequisites for running this example:
 Please execute the following commands under the `flink-sliding-feature-view-benchmark` 
 folder to run the benchmarks.
 
-1. Install Feathub pip package.
+1. Install FeatHub pip package.
 
    ```bash
    $ python -m pip install --upgrade feathub-nightly
