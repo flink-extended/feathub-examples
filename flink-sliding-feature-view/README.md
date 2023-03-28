@@ -69,7 +69,7 @@ folder to run this example.
    navigate to the web UI at [localhost:8081](http://localhost:8081) to view the
    Flink dashboard.
 
-3. Producer events into the two Kafka topics.
+3. Produce events into the two Kafka topics.
 
    ```bash
    $ python initialize_kafka_topic.py
