@@ -7,6 +7,7 @@ This project provides example programs for key
 
 - [Flink - DerivedFeatureView](flink-derived-feature-view)
 - [Flink - SlidingFeatureView](flink-sliding-feature-view)
+- [Flink - SqlFeatureView](flink-sql-feature-view)
 - [Flink - Read and Write HDFS](flink-read-write-hdfs)
 - [Flink - Read and Write Redis](flink-read-write-redis)
 - [Flink - Read and Write MySQL](flink-read-write-mysql)

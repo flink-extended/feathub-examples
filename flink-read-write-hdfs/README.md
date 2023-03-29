@@ -9,7 +9,7 @@ the following steps:
    Each purchase event has the following fields:
    - user_id, unique identifier of the user that made the purchase.
    - item_id, unique identifier of the item that is purchased.
-   - item_count, number of items purcahsed.
+   - item_count, number of items purchased.
    - timestamp, time when this purchase is made.
 
 2. Read a batch of historical item price events from a file.
