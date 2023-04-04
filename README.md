@@ -10,6 +10,7 @@ This project provides example programs for key
 - [Flink - Read and Write HDFS](flink-read-write-hdfs)
 - [Flink - Read and Write Redis](flink-read-write-redis)
 - [Flink - Read and Write MySQL](flink-read-write-mysql)
+- [Spark - DerivedFeatureView](spark-derived-feature-view)
 
 
 ## Code Formatting Guide
