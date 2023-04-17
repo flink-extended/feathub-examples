@@ -25,7 +25,9 @@ if __name__ == "__main__":
         props={
             "processor": {
                 "type": "flink",
-                "flink": {"rest.address": "localhost", "rest.port": 8081},
+                "flink": {
+                    "master": "localhost:8081",
+                },
             },
             "online_store": {
                 "types": ["memory"],
