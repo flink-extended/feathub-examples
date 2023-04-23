@@ -10,12 +10,13 @@ services:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
     # Use Kafka 3.2
-    image: docker.io/bitnami/kafka@sha256:d9e13bcf9301ee02fbfb4b2c476d3d3db48a4cef0875090ea63e45bb894fbb1f
+    image: docker.io/bitnami/kafka:3.2
     ports:
       - "9093:9093"
     volumes:
       - "kafka_data:/tmp/kafka"
     environment:
+      - KAFKA_ENABLE_KRAFT=no
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
