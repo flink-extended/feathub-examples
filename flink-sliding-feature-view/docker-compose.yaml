@@ -9,7 +9,8 @@ services:
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
   kafka:
-    image: docker.io/bitnami/kafka:3.2
+    # Use Kafka 3.2
+    image: docker.io/bitnami/kafka@sha256:d9e13bcf9301ee02fbfb4b2c476d3d3db48a4cef0875090ea63e45bb894fbb1f
     ports:
       - "9093:9093"
     volumes:
