@@ -26,7 +26,7 @@ services:
     depends_on:
       - zookeeper
   flink:
-    image: apache/flink:1.15.2
+    image: apache/flink:1.16.1
     command:
       - bash
       - -c
