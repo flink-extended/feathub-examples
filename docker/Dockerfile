@@ -1,4 +1,4 @@
-FROM flink:1.15.2
+FROM flink:1.16.1
 
 ENV HADOOP_VERSION=3.2.4
 ENV PATH=/opt/hadoop-$HADOOP_VERSION/bin/:$PATH
@@ -12,13 +12,13 @@ RUN curl -O https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop
 WORKDIR ${FLINK_HOME}
 RUN mkdir plugins/oss-fs-hadoop && \
     mkdir plugins/s3-fs-hadoop && \
-    ln -s ../../opt/flink-oss-fs-hadoop-1.15.2.jar plugins/oss-fs-hadoop/flink-oss-fs-hadoop-1.15.2.jar && \
-    ln -s ../../opt/flink-s3-fs-hadoop-1.15.2.jar plugins/s3-fs-hadoop/flink-s3-fs-hadoop-1.15.2.jar
+    ln -s ../../opt/flink-oss-fs-hadoop-1.16.1.jar plugins/oss-fs-hadoop/flink-oss-fs-hadoop-1.16.1.jar && \
+    ln -s ../../opt/flink-s3-fs-hadoop-1.16.1.jar plugins/s3-fs-hadoop/flink-s3-fs-hadoop-1.16.1.jar
 
-# Install python3.7. This is because flink:1.15.2 docker image has been upgraded to use Debian 11 which
+# Install python3.7. This is because flink:1.16.1 docker image has been upgraded to use Debian 11 which
 # uses Python 3.9. But PyFlink only supports Python 3.6, 3.7 and 3.8.
 RUN apt-get update -y && \
-apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libffi-dev && \
+apt-get install -y build-essential libssl-dev zlib1g-dev libbz2-dev libffi-dev liblzma-dev && \
 wget https://www.python.org/ftp/python/3.7.9/Python-3.7.9.tgz && \
 tar -xvf Python-3.7.9.tgz && \
 cd Python-3.7.9 && \

@@ -7,7 +7,7 @@ services:
     ports:
       - "3306:3306"
   flink:
-    image: apache/flink:1.15.2
+    image: apache/flink:1.16.1
     command:
       - bash
       - -c
