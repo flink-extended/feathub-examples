@@ -1,12 +1,13 @@
-FROM flink:1.16.1
+FROM flink:1.16.1-java8
 
-ENV HADOOP_VERSION=3.2.4
+ENV HADOOP_VERSION=3.1.2
 ENV PATH=/opt/hadoop-$HADOOP_VERSION/bin/:$PATH
 
-# Download and extract hadoop binary
+# Download and configure hadoop binary
 WORKDIR /opt
-RUN curl -O https://dlcdn.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
+RUN curl -O https://archive.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz && \
     tar -xzvf hadoop-$HADOOP_VERSION.tar.gz
+RUN echo "export HADOOP_CLASSPATH=`hadoop classpath`" >> ~/.bashrc
 
 # Install flink plugins
 WORKDIR ${FLINK_HOME}

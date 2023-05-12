@@ -1,0 +1,39 @@
+version: "2.1"
+
+services:
+  flink:
+    image: feathub-flink:latest
+    container_name: flink
+    networks:
+      - flink-hive-network
+    command: bash -c "
+        mv ./opt/flink-table-planner_*.jar ./lib/;
+        mv ./lib/flink-table-planner-loader-*.jar ./opt/;
+        export HADOOP_CLASSPATH=`hadoop classpath`;
+        ./bin/start-cluster.sh; while true; do sleep 10; done
+      "
+    ports:
+      - "8081:8081"
+    volumes:
+      - "flink_data:/tmp/flink"
+      - "./data:/tmp/data"
+      - "./flink-sql-connector-hive-3.1.2_2.12-1.16.1.jar:/usr/local/lib/python3.7/site-packages/pyflink/lib/flink-sql-connector-hive-3.1.2_2.12-1.16.1.jar"
+      - "./flink-sql-connector-hive-3.1.2_2.12-1.16.1.jar:/opt/flink/lib/flink-sql-connector-hive-3.1.2_2.12-1.16.1.jar"
+      - ".:/root/flink-read-write-hive"
+  hadoop-master:
+    image: prestodb/hive3.1-hive:10
+    container_name: hadoop-master
+    networks:
+      - flink-hive-network
+    extra_hosts:
+      - hadoop-master:127.0.0.1
+    ports:
+      - "9083:9083"
+
+networks:
+  flink-hive-network:
+    name: flink-hive-network
+
+volumes:
+  flink_data:
+    driver: local
