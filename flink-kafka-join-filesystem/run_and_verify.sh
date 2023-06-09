@@ -38,7 +38,7 @@ while true; do
     --bootstrap-server localhost:9093 \
     --topic enriched_user_behavior_events \
     --from-beginning \
-    --timeout-ms 10000 > data/kafka-output
+    --timeout-ms 20000 > data/kafka-output
   if [ "$(wc -l < data/kafka-output)" -ge 10 ]; then
     break
   fi;
