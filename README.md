@@ -6,12 +6,14 @@ This project provides example programs for key
 ## Table of Contents
 
 - [Flink - DerivedFeatureView](flink-derived-feature-view)
+- [Flink - SlidingFeatureView](flink-sliding-feature-view)
 - [Flink - SqlFeatureView](flink-sql-feature-view)
-- [Flink - SlidingFeatureView with Kafka Source](flink-sliding-feature-view)
-- [Flink - Read and Write HDFS](flink-read-write-hdfs)
-- [Flink - Read and Write Redis](flink-read-write-redis)
-- [Flink - Read and Write MySQL](flink-read-write-mysql)
+- [Flink - Join Stream from FileSystem with table from Redis](flink-filesystem-join-redis)
 - [Flink - Join stream from Kafka with table from FileSystem](flink-kafka-join-filesystem)
+- [Flink - Read and Write HDFS](flink-read-write-hdfs)
+- [Flink - Read and Write Hive](flink-read-write-hive)
+- [Flink - Read and Write MySQL](flink-read-write-mysql)
+- [Flink - Read and Write Redis](flink-read-write-redis)
 - [Spark - DerivedFeatureView](spark-derived-feature-view)
 
 

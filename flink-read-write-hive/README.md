@@ -1,6 +1,6 @@
 # Overview
 
-This example shows how to save input dataset with features into a Hive service
+This example shows how to save input dataset with features into a Hive table
 with `HiveSink`, and reads out the saved features with `HiveSource`. It involves
 the following steps:
 
@@ -11,12 +11,11 @@ the following steps:
    - price, the new price of this item.
    - timestamp, time when the new price is used for this item.
 
-2. For each item price event, save the event into a Hive service. As the sink is
+2. For each item price event, save the event into a Hive table. As the sink is
    running as a streaming append sink, features with the same item_id would be
    saved as different entries in the Hive table.
 
-3. Read the latest item prices from the Hive service and display them onto the
-   terminal.
+3. Read the latest item prices from the Hive table and save them to a local file.
 
 # Prerequisites
 
@@ -57,21 +56,29 @@ to run this example.
    $ docker exec -w /root/flink-read-write-hive flink bash -c "export HADOOP_CLASSPATH=\`hadoop classpath\`; python main.py"
    ```
 
-   You should be able to find the following information printed out in the end
-   of the terminal.
+   The program would create and submit two Flink jobs, and The second job reads 
+   Hive table as an unbounded stream and runs continuously until it is 
+   explicitly cancelled. You may open a second terminal and execute the
+   following command to check the results saved in local file.
 
    ```
-     item_id  price                  timestamp
-   0  item_1  100.0  2022-01-01 00:00:00 +0800
-   1  item_2  200.0  2022-01-01 00:00:00 +0800
-   2  item_3  300.0  2022-01-01 00:00:00 +0800
-   3  item_1  200.0  2022-01-01 00:01:30 +0800
-   4  item_1  300.0  2022-01-01 00:02:30 +0800
-   5  item_1  400.0  2022-01-01 00:03:30 +0800
+   cat data/output/.part-*
    ```
 
-5. Tear down the Flink cluster and Hive cluster after the FeatHub program has
-   finished.
+   You should be able to find the following information printed out in the
+   terminal.
+
+   ```
+   item_1,100.0,"2022-01-01 00:00:00 +0800"
+   item_2,200.0,"2022-01-01 00:00:00 +0800"
+   item_3,300.0,"2022-01-01 00:00:00 +0800"
+   item_1,200.0,"2022-01-01 00:01:30 +0800"
+   item_1,300.0,"2022-01-01 00:02:30 +0800"
+   item_1,400.0,"2022-01-01 00:03:30 +0800"
+   ```
+
+5. Press Control-C to stop the program and tear down the Flink cluster and
+   Hive cluster after the FeatHub program has finished.
 
    ```bash
    docker-compose down
