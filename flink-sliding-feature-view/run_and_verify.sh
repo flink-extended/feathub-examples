@@ -29,7 +29,7 @@ wait_for_port 9093 "Kafka Cluster"
 python initialize_kafka_topic.py
 python main.py &
 export PID=$!
-curl -LO https://downloads.apache.org/kafka/3.2.3/kafka_2.12-3.2.3.tgz
+curl -LO https://archive.apache.org/dist/kafka/3.2.3/kafka_2.12-3.2.3.tgz
 tar -xzf kafka_2.12-3.2.3.tgz
 
 TIMEOUT_SECONDS=$((SECONDS + 120)) # timeout in 2 minutes

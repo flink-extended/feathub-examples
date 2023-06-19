@@ -69,7 +69,7 @@ folder to run this example.
    Download Kafka consumer and read events from the output topic.
 
    ```bash
-   $ curl -LO https://downloads.apache.org/kafka/3.2.3/kafka_2.12-3.2.3.tgz
+   $ curl -LO https://archive.apache.org/dist/kafka/3.2.3/kafka_2.12-3.2.3.tgz
    $ tar -xzf kafka_2.12-3.2.3.tgz
    $ ./kafka_2.12-3.2.3/bin/kafka-console-consumer.sh \
        --bootstrap-server localhost:9093 \
