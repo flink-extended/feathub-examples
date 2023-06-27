@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: flink-main-container
+      volumeMounts:
+        - mountPath: /tmp/data/output
+          name: flink-volume-hostpath
+  volumes:
+    - name: flink-volume-hostpath
+      hostPath:
+        path: /tmp/flink-kubernetes-application/output
+        type: DirectoryOrCreate
