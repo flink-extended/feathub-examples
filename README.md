@@ -15,6 +15,7 @@ This project provides example programs for key
 - [Flink - Read and Write MySQL](flink-read-write-mysql)
 - [Flink - Read and Write Redis](flink-read-write-redis)
 - [Flink - Kubernetes Application](flink-kubernetes-application)
+- [Flink - Yarn Application](flink-yarn-application)
 - [Spark - DerivedFeatureView](spark-derived-feature-view)
 
 
