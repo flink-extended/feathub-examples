@@ -53,3 +53,5 @@ kill "${PID}"
 docker-compose down
 
 sort_and_compare_files data/kafka-output data/expected_output.txt
+
+rm -rf kafka_2.12-3.2.3.tgz kafka_2.12-3.2.3

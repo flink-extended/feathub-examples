@@ -29,7 +29,7 @@ wait_for_port 9093 "Kafka Cluster"
 python initialize_kafka_topic.py
 python main.py &
 export PID=$!
-  curl -LO https://archive.apache.org/dist/kafka/3.2.3/kafka_2.12-3.2.3.tgz
+curl -LO https://archive.apache.org/dist/kafka/3.2.3/kafka_2.12-3.2.3.tgz
 tar -xzf kafka_2.12-3.2.3.tgz
 
 TIMEOUT_SECONDS=$((SECONDS + 120)) # timeout in 2 minutes
@@ -53,3 +53,5 @@ kill "${PID}"
 docker-compose down
 
 sort_and_compare_files data/kafka-output data/expected_output.txt
+
+rm -rf kafka_2.12-3.2.3.tgz kafka_2.12-3.2.3
