@@ -45,4 +45,5 @@ minikube ssh --native-ssh=false -- 'cat /tmp/flink-kubernetes-application/output
 sort_and_compare_files data/merged_output data/expected_output.txt
 
 rm -rf flink-1.16.2-bin-scala_2.12.tgz ./flink-1.16.2
+docker rmi -f flink-k8s-app
 
