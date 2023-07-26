@@ -20,8 +20,12 @@ cd "$(dirname "$0")"
 PROJECT_DIR=$(cd "$(pwd)/.."; pwd)
 source "${PROJECT_DIR}"/tools/utils.sh
 
+df -h
 curl -LO https://archive.apache.org/dist/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz
-tar -xzf hadoop-3.3.6.tar.gz --exclude='hadoop-3.3.6/share/doc/**' --exclude='hadoop-3.3.6/share/tools/lib/**'
+tar -xzf hadoop-3.3.6.tar.gz \
+  --exclude='hadoop-3.3.6/share/doc' \
+  --exclude='hadoop-3.3.6/share/hadoop/tools/lib' \
+  --exclude='hadoop-3.3.6/share/hadoop/yarn/hadoop-yarn-applications-catalog-webapp-*.war'
 rm -rf hadoop-3.3.6.tar.gz
 cp -r etc/hadoop hadoop-3.3.6/etc
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa

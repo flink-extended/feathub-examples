@@ -21,6 +21,12 @@ jobs:
       matrix:
         python_version: ["3.7", "3.8", "3.9"]
     steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          root-reserve-mb: 32768
+          remove-dotnet: 'true'
+          remove-android: 'true'
       - uses: actions/checkout@v3
       - name: start mimnikube
         uses: medyagh/setup-minikube@latest

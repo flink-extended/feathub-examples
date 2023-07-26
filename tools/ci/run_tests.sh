@@ -23,9 +23,14 @@ python -m pip -q install --upgrade "feathub-nightly[spark]"
 
 docker build -q --rm -t feathub-flink -f ./docker/Dockerfile .
 
+echo "Free space: "
+df -h
+
 # Run the run_and_verify.sh script in each example folder
 for EXAMPLE_RUN_SCRIPT in "${PROJECT_DIR}"/*/run_and_verify.sh; do
   echo "Running example ${EXAMPLE_RUN_SCRIPT}..."
   bash "${EXAMPLE_RUN_SCRIPT}"
   echo "Example ${EXAMPLE_RUN_SCRIPT} success."
+  echo "Free space: "
+  df -h
 done
