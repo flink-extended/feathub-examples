@@ -50,7 +50,7 @@ while true; do
 done
 
 kill "${PID}"
-docker-compose down
+tear_down_docker
 
 sort_and_compare_files data/kafka-output data/expected_output.txt
 

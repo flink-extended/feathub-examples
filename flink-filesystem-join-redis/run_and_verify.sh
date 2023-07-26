@@ -26,7 +26,7 @@ wait_for_port 8081 "Flink Cluster"
 
 python initialize_redis.py
 python main.py
-docker-compose down
+tear_down_docker
 
 cat data/output.json/* > data/merged_output
 

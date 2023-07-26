@@ -25,7 +25,7 @@ docker-compose up -d
 wait_for_port 8081 "Flink Cluster"
 
 python main.py
-docker-compose down
+tear_down_docker
 
 cat data/output.json/* > data/merged_output
 

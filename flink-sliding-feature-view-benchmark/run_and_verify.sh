@@ -25,4 +25,4 @@ wait_for_port 8081 "Flink Cluster"
 
 python main.py --records-num 1000
 
-docker-compose down
+tear_down_docker

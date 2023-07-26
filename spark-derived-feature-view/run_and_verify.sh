@@ -28,7 +28,7 @@ wait_for_port 7077 "Spark Cluster"
 cp -r ./data /tmp/feathub-data
 python3 main.py
 
-docker-compose down
+tear_down_docker
 
 cat data/output.json/_temporary/0/*/* > data/merged_output
 

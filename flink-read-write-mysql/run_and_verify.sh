@@ -27,6 +27,6 @@ wait_for_port 8081 "Flink Cluster"
 python initialize_mysql_table.py
 python main.py
 exit_code=$?
-docker-compose down
+tear_down_docker
 
 exit $exit_code

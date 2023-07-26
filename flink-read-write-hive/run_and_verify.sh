@@ -45,7 +45,7 @@ while true; do
 done
 
 kill "${PID}"
-docker-compose down
+tear_down_docker
 
 cat data/output/.part-* > data/merged_output
 

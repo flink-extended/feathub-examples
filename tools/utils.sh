@@ -40,3 +40,11 @@ function sort_and_compare_files {
 
 	rm "${FILE1}".sorted
 }
+
+function tear_down_docker {
+  docker-compose down
+  docker container prune -f
+  docker volume prune -f
+  docker network prune -f
+  docker builder prune -a -f
+}
