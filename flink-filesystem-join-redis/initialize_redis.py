@@ -16,6 +16,8 @@ from feathub.common import types
 from feathub.feathub_client import FeathubClient
 from feathub.feature_tables.sinks.redis_sink import RedisSink
 from feathub.feature_tables.sources.file_system_source import FileSystemSource
+from feathub.feature_views.derived_feature_view import DerivedFeatureView
+from feathub.feature_views.feature import Feature
 from feathub.table.schema import Schema
 
 if __name__ == "__main__":
@@ -49,6 +51,8 @@ if __name__ == "__main__":
         .column("item_id", types.String)
         .column("brand", types.String)
         .column("category", types.String)
+        .column("production_country", types.String)
+        .column("production_city", types.String)
         .build()
     )
 
@@ -61,7 +65,22 @@ if __name__ == "__main__":
         keys=["item_id"],
     )
 
-    result_table = client.get_features(item_attributes_source)
+    item_attributes_view = DerivedFeatureView(
+        name="item_attributes_view",
+        source=item_attributes_source,
+        features=[
+            "item_id",
+            "brand",
+            "category",
+            Feature(
+                name="production_place",
+                transform="MAP('country', production_country, 'city', production_city)",
+            ),
+        ],
+        keep_source_fields=False,
+    )
+
+    result_table = client.get_features(item_attributes_view)
 
     redis_sink = RedisSink(
         host="redis",

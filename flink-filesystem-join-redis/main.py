@@ -18,6 +18,8 @@ from feathub.feature_tables.sinks.file_system_sink import FileSystemSink
 from feathub.feature_tables.sources.file_system_source import FileSystemSource
 from feathub.feature_tables.sources.redis_source import RedisSource
 from feathub.feature_views.derived_feature_view import DerivedFeatureView
+from feathub.feature_views.feature import Feature
+from feathub.feature_views.transforms.join_transform import JoinTransform
 from feathub.table.schema import Schema
 
 if __name__ == "__main__":
@@ -70,6 +72,7 @@ if __name__ == "__main__":
         .column("item_id", types.String)
         .column("brand", types.String)
         .column("category", types.String)
+        .column("production_place", types.MapType(types.String, types.String))
         .build()
     )
 
@@ -83,7 +86,17 @@ if __name__ == "__main__":
     enriched_user_behavior_events = DerivedFeatureView(
         name="enriched_user_behavior_events",
         source=user_behavior_events_source,
-        features=["item_attributes.brand"],
+        features=[
+            "item_attributes.brand",
+            Feature(
+                name="production_city",
+                transform=JoinTransform(
+                    table_name="item_attributes",
+                    expr="production_place['city']",
+                ),
+                dtype=types.String,
+            ),
+        ],
         keep_source_fields=True,
     )
 

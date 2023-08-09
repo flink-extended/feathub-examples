@@ -19,7 +19,16 @@ following steps:
    - item_id, unique identifier of the item.
    - brand, the brand of this item.
    - category, the category of the item.
-   - timestamp, time when the item is created or updated.
+   - production_place, the location where the item is produced. It is a map with
+     the following entries.
+      - country, the country where the item is produced.
+      - city, the city where the item is produced.
+   
+   During the joining, the brand and the city of the production_place would be
+   appended to each event. Note that users can use brackets to describe the
+   operation to join a static entry in a Map-typed feature, and in this case
+   Redis lookup source would only read the specific entry from Redis, instead of
+   reading the whole map. 
 
 
 3. Output the enriched user activity events to a local file.
@@ -68,16 +77,17 @@ folder to run this example.
    terminal.
 
    ```
-   {"user_id":"u6","item_id":"i1","action_type":"exposure","timestamp":1684484065,"brand":"brand1"}
-   {"user_id":"u1","item_id":"i9","action_type":"click","timestamp":1684484069,"brand":"brand3"}
-   {"user_id":"u10","item_id":"i2","action_type":"exposure","timestamp":1684484066,"brand":"brand1"}
-   {"user_id":"u4","item_id":"i4","action_type":"exposure","timestamp":1684484067,"brand":"brand2"}
-   {"user_id":"u9","item_id":"i7","action_type":"exposure","timestamp":1684484068,"brand":"brand3"}
-   {"user_id":"u9","item_id":"i6","action_type":"exposure","timestamp":1684484068,"brand":"brand2"}
-   {"user_id":"u6","item_id":"i5","action_type":"exposure","timestamp":1684484067,"brand":"brand2"}
-   {"user_id":"u5","item_id":"i8","action_type":"exposure","timestamp":1684484069,"brand":"brand3"}
-   {"user_id":"u3","item_id":"i3","action_type":"exposure","timestamp":1684484066,"brand":"brand1"}
-   {"user_id":"u4","item_id":"i10","action_type":"exposure","timestamp":1684484070,"brand":"brand3"}
+     user_id item_id action_type   timestamp   brand production_city
+   0      u6      i1    exposure  1684484065  brand1           cityA
+   1     u10      i2    exposure  1684484066  brand1           cityA
+   2      u3      i3    exposure  1684484066  brand1           cityB
+   3      u4      i4    exposure  1684484067  brand2           cityC
+   4      u6      i5    exposure  1684484067  brand2           cityC
+   5      u9      i6    exposure  1684484068  brand2           cityC
+   6      u9      i7    exposure  1684484068  brand3                
+   7      u5      i8    exposure  1684484069  brand3           cityD
+   8      u1      i9       click  1684484069  brand3           cityE
+   9      u4     i10    exposure  1684484070  brand3           cityF
    ```
 
 5. Tear down the Flink and the Redis clusters after the FeatHub program has
