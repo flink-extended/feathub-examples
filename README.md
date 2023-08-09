@@ -14,6 +14,7 @@ This project provides example programs for key
 - [Flink - Read and Write Hive](flink-read-write-hive)
 - [Flink - Read and Write MySQL](flink-read-write-mysql)
 - [Flink - Read and Write Redis](flink-read-write-redis)
+- [Flink - Report metrics to Prometheus](flink-metric-prometheus)
 - [Flink - Kubernetes Application](flink-kubernetes-application)
 - [Flink - Yarn Application](flink-yarn-application)
 - [Spark - DerivedFeatureView](spark-derived-feature-view)

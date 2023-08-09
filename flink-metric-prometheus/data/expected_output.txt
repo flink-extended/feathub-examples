@@ -1,0 +1,2 @@
+custom_namespace_total_payment_count{feature_name="total_payment",filter_expr="> 500",instance="",job="custom_namespace",metric_type="count",table_name="",window_time_sec="86400"} 2
+custom_namespace_total_payment_ratio{feature_name="total_payment",filter_expr="> 500",instance="",job="custom_namespace",metric_type="ratio",table_name="",window_time_sec="0"} 0.4
