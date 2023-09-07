@@ -70,6 +70,7 @@ if __name__ == "__main__":
         hive_catalog_conf_dir=".",
         database="default",
         table="item_price_events",
+        data_format="parquet",
         processor_specific_props={
             "sink.partition-commit.watermark-time-zone": "Asia/Shanghai",
             "sink.partition-commit.policy.kind": "metastore,success-file",
@@ -83,6 +84,7 @@ if __name__ == "__main__":
         database="default",
         table="item_price_events",
         schema=item_price_events_schema,
+        data_format="parquet",
         keys=["item_id"],
         hive_catalog_conf_dir=".",
     )
