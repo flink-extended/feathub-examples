@@ -22,6 +22,7 @@ python -m pip -q install --upgrade "feathub-nightly[flink]"
 python -m pip -q install --upgrade "feathub-nightly[spark]"
 
 docker build -q --rm -t feathub-flink -f ./docker/Dockerfile .
+docker system prune -f
 
 echo "Free space: "
 df -h
@@ -31,6 +32,7 @@ for EXAMPLE_RUN_SCRIPT in "${PROJECT_DIR}"/*/run_and_verify.sh; do
   echo "Running example ${EXAMPLE_RUN_SCRIPT}..."
   bash "${EXAMPLE_RUN_SCRIPT}"
   echo "Example ${EXAMPLE_RUN_SCRIPT} success."
+  docker system prune -f
   echo "Free space: "
   df -h
 done

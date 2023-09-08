@@ -1,0 +1,11 @@
+{"user_id":1,"window_time":1640966459999,"total_item_last_two_minutes":1}
+{"user_id":1,"window_time":1640966519999,"total_item_last_two_minutes":3}
+{"user_id":1,"window_time":1640966579999,"total_item_last_two_minutes":5}
+{"user_id":1,"window_time":1640966639999,"total_item_last_two_minutes":3}
+{"user_id":2,"window_time":1640966639999,"total_item_last_two_minutes":1}
+{"user_id":1,"window_time":1640966699999,"total_item_last_two_minutes":2}
+{"user_id":1,"window_time":1640966759999,"total_item_last_two_minutes":3}
+{"user_id":2,"window_time":1640966759999,"total_item_last_two_minutes":0}
+{"user_id":1,"window_time":1640966879999,"total_item_last_two_minutes":5}
+{"user_id":1,"window_time":1640966939999,"total_item_last_two_minutes":3}
+{"user_id":2,"window_time":1640966939999,"total_item_last_two_minutes":1}
