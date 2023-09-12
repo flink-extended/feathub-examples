@@ -18,6 +18,7 @@ This project provides example programs for key
 - [Flink - Sequential Recommendation](flink-sequential-recommendation)
 - [Flink - Kubernetes Application](flink-kubernetes-application)
 - [Flink - Yarn Application](flink-yarn-application)
+- [Flink - Fault Tolerance](flink-fault-tolerance)
 - [Spark - DerivedFeatureView](spark-derived-feature-view)
 
 

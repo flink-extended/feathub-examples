@@ -1,0 +1,64 @@
+version: '2.1'
+services:
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    ports:
+      - "2181:2181"
+    volumes:
+      - "zookeeper_data:/tmp/zk"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    # Use Kafka 3.2
+    image: docker.io/bitnami/kafka:3.2
+    ports:
+      - "9093:9093"
+    volumes:
+      - "kafka_data:/tmp/kafka"
+    environment:
+      - KAFKA_ENABLE_KRAFT=no
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
+      - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=CLIENT
+    depends_on:
+      - zookeeper
+  jobmanager:
+    container_name: jobmanager
+    image: apache/flink:1.16.1
+    command:
+      - ./bin/jobmanager.sh
+      - start-foreground
+    ports:
+      - "8081:8081"
+    environment:
+      FLINK_PROPERTIES: |-
+        jobmanager.rpc.address: jobmanager
+    volumes:
+      - "flink_data:/tmp/flink"
+      - "./data:/tmp/data"
+  taskmanager:
+    container_name: taskmanager
+    restart: always
+    stop_grace_period: 0s
+    image: apache/flink:1.16.1
+    command:
+      - ./bin/taskmanager.sh
+      - start-foreground
+    environment:
+      FLINK_PROPERTIES: |-
+        jobmanager.rpc.address: jobmanager
+        taskmanager.numberOfTaskSlots: 2
+    volumes:
+      - "flink_data:/tmp/flink"
+      - "./data:/tmp/data"
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local
+  flink_data:
+    driver: local
