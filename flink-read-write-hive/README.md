@@ -30,7 +30,7 @@ to run this example.
 1. Build the Flink image to support Hive.
 
    ```bash
-   $ docker build --rm -t feathub-flink -f ../docker/Dockerfile .
+   $ docker build --rm -t feathub-flink -f ../docker/Dockerfile ../docker
    ```
 
 2. Download Flink's bundled hive jar to the `flink-read-write-hive` folder.
