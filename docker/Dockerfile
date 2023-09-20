@@ -1,5 +1,14 @@
 FROM flink:1.16.1-java8
 
+# The target FeatHub Python package to build the image with.
+# It could be a URL to a Feathub Python wheel file or a package on Pypi.
+# If it is a package, it should include the flink submodule.
+# Valid input examples are as follows.
+# - feathub-nightly[flink] (default value)
+# - feathub[flink]==0.1.0
+# - https://github.com/alibaba/feathub/releases/download/release-0.1.0-rc1/feathub-0.1.0-py3-none-any.whl
+ARG FEATHUB_PACKAGE=feathub-nightly[flink]
+
 ENV HADOOP_VERSION=3.1.2
 ENV PATH=/opt/hadoop-$HADOOP_VERSION/bin/:$PATH
 
@@ -33,7 +42,8 @@ apt-get clean && \
 rm -rf /var/lib/apt/lists/*
 
 # Install FeatHub with FlinkProcessor dependencies
-RUN pip3 install feathub-nightly[flink]
+COPY install_feathub_with_flink.sh /opt/install_feathub_with_flink.sh
+RUN bash /opt/install_feathub_with_flink.sh $FEATHUB_PACKAGE
 
 # Further customization can be added.
 # You can refer to https://nightlies.apache.org/flink/flink-docs-master/docs/deployment/resource-providers/standalone/docker/#further-customization.

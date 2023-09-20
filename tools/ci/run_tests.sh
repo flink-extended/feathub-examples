@@ -17,11 +17,18 @@ set -e
 
 PROJECT_DIR=$(cd "$(dirname "$0")/../.."; pwd)
 
+TARGET_PACKAGE=$1
+
+if [ -n "${TARGET_PACKAGE}" ] ;then
+  echo "using target FeatHub package ${TARGET_PACKAGE}"
+  BUILD_ARGS="--build-arg FEATHUB_PACKAGE=${TARGET_PACKAGE}"
+fi
+
 python -m pip -q install --upgrade "feathub-nightly[flink]"
 
 python -m pip -q install --upgrade "feathub-nightly[spark]"
 
-docker build -q --rm -t feathub-flink -f ./docker/Dockerfile .
+docker build -q --rm -t feathub-flink -f ./docker/Dockerfile ${BUILD_ARGS} ./docker
 docker system prune -f
 
 echo "Free space: "

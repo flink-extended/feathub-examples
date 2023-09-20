@@ -13,6 +13,11 @@ on:
         description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
         required: false
         default: false
+      target_package:
+        type: string
+        description: 'Target FeatHub Python package (See FEATHUB_PACKAGE argument in ./docker/Dockerfile for more details)'
+        required: false
+        default: ''
 jobs:
   run-examples:
     runs-on: ubuntu-20.04
@@ -41,7 +46,7 @@ jobs:
         with:
           python-version: ${{ inputs.python_version }}
       - name: Run example
-        run: bash tools/ci/run_tests.sh
+        run: bash tools/ci/run_tests.sh ${{ inputs.target_package }}
       - name: Debug with tmate
         if: ${{ failure() && inputs.debug_enabled }}
         uses: mxschmitt/action-tmate@v3
