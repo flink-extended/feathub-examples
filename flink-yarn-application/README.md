@@ -74,7 +74,7 @@ folder to run this example.
    $ ./hadoop-3.3.6/bin/hdfs dfs -put venv.zip /venv.zip
    $ rm -rf venv venv.zip
    $ ./hadoop-3.3.6/bin/hdfs dfs -put data /data
-   $ ./hadoop-3.3.6/bin/hdfs dfs -put main.py /main.py
+   $ ./hadoop-3.3.6/bin/hdfs dfs -put code /code
    ```
 
 3. Submit the Feathub job to Yarn cluster
@@ -89,7 +89,7 @@ folder to run this example.
        -pyarch hdfs:///venv.zip \
        -pyclientexec venv.zip/venv/bin/python3 \
        -pyexec venv.zip/venv/bin/python3 \
-       -pyfs hdfs:///main.py \
+       -pyfs hdfs:///code \
        -pym main
    ```
    
@@ -108,11 +108,11 @@ folder to run this example.
    The file should contain the following rows:
 
    ```
-   user_1,item_1,1,"2022-01-01 00:00:00",100.0,100.0
-   user_1,item_2,2,"2022-01-01 00:01:00",200.0,500.0
-   user_1,item_1,3,"2022-01-01 00:02:00",200.0,1100.0
-   user_2,item_1,1,"2022-01-01 00:03:00",300.0,300.0
-   user_1,item_3,2,"2022-01-01 00:04:00",300.0,1200.0
+   user_1,item_1,1,"2022-01-01 00:00:00",user_1item_1,100.0,100.0
+   user_1,item_2,2,"2022-01-01 00:01:00",user_1item_2,200.0,500.0
+   user_1,item_1,3,"2022-01-01 00:02:00",user_1item_1,200.0,1100.0
+   user_2,item_1,1,"2022-01-01 00:03:00",user_2item_1,300.0,300.0
+   user_1,item_3,2,"2022-01-01 00:04:00",user_1item_3,300.0,1200.0
    ```
 
 5. Tear down the Yarn cluster.

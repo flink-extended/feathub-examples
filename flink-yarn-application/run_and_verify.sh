@@ -48,7 +48,7 @@ zip -q -r venv.zip venv
 ./hadoop-3.3.6/bin/hdfs dfs -put venv.zip /venv.zip
 rm -rf venv venv.zip
 ./hadoop-3.3.6/bin/hdfs dfs -put data /data
-./hadoop-3.3.6/bin/hdfs dfs -put main.py /main.py
+./hadoop-3.3.6/bin/hdfs dfs -put code /code
 
 echo Submitting Feathub job to Yarn cluster
 curl -LO https://archive.apache.org/dist/flink/flink-1.16.2/flink-1.16.2-bin-scala_2.12.tgz
@@ -61,7 +61,7 @@ HADOOP_CLASSPATH=$(hadoop-3.3.6/bin/hadoop classpath) \
    -pyarch hdfs:///venv.zip \
    -pyclientexec venv.zip/venv/bin/python3 \
    -pyexec venv.zip/venv/bin/python3 \
-   -pyfs hdfs:///main.py \
+   -pyfs hdfs:///code \
    -pym main
 
 APPLICATION_ID=$(./hadoop-3.3.6/bin/yarn app -list | grep feathub_job | awk '{print $1}')

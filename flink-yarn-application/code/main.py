@@ -26,6 +26,8 @@ from feathub.common import types
 from feathub.feature_tables.sources.file_system_source import FileSystemSource
 from feathub.table.schema import Schema
 
+from transforms import concat_user_id_item_id_transform
+
 if __name__ == "__main__":
     client = FeathubClient(
         props={
@@ -99,10 +101,17 @@ if __name__ == "__main__":
         ),
     )
 
+    f_user_id_item_id = Feature(
+        name="user_id_item_id",
+        transform=concat_user_id_item_id_transform,
+        dtype=types.String,
+    )
+
     purchase_events_with_features = DerivedFeatureView(
         name="purchase_events_with_features",
         source=purchase_events_source,
         features=[
+            f_user_id_item_id,
             "item_price_events.price",
             f_total_payment_last_two_minutes,
         ],
